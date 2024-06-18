@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <style>
+            span{
+                margin-left: 5px;
+                font-weight: 600;
+            }
+            #display{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+<form onsubmit='/createprod/' method="post">
+
+<input type="text" name="title" placeholder="Title"><br/>
+<input type="number" name="price" placeholder="Price"><br/>
+<button>Submit</button>
+</form>
+<h2>To display all data,click here <button onclick='display()'>Fetch All</button></h2>
+<div id="display"></div>
+<script>
+
+function display()
+{
+    fetch('http://localhost:2100/all')
+    .then(res=>res.json())
+    .then((data)=>{
+var k=document.getElementById("display");
+data.forEach(ele => {
+    var p=document.createElement('span');
+    p.innerText=ele.title;
+    var t=document.createElement('span');
+    t.innerText=ele.price;
+    var c=document.createElement('br')
+    k.append(p);
+    k.append(t);
+    k.append(c)
+});
+    })
+}
+</script>
+</body>
+</html>
